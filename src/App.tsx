@@ -4,13 +4,7 @@ import GasPrices from "./components/GasPrice";
 
 function App() {
   return (
-    <Theme
-      grayColor="gray"
-      panelBackground="solid"
-      scaling="100%"
-      radius="full"
-      hasBackground={false}
-    >
+    <Theme hasBackground={false}>
       <GasPrices />
     </Theme>
   );

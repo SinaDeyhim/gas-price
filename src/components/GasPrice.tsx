@@ -1,4 +1,4 @@
-import React, { Suspense, useState } from "react";
+import React, { Suspense } from "react";
 import {
   Card,
   Container,
@@ -9,6 +9,7 @@ import {
 } from "@radix-ui/themes";
 import useFetchSuspense from "../hooks/useSuspenseFetch";
 import ErrorBoundary from "./ErrorBoundary";
+import useSuspenseRefetch from "../hooks/useSuspenseRefetch";
 
 type GasPricesResult = {
   FastGasPrice: string;
@@ -38,7 +39,7 @@ const GAS_COLOR: Record<GasTier, string> = {
 };
 
 const GasPricesContent: React.FC = () => {
-  const gasPrices = useFetchSuspense(GAS_PRICE_URL) as GasPricesResponse;
+  const gasPrices = useSuspenseRefetch(GAS_PRICE_URL) as GasPricesResponse;
 
   return (
     <Container className="mx-auto p-4 max-w-screen-md mt-6">
@@ -61,7 +62,7 @@ const GasPricesContent: React.FC = () => {
 
 const GasPriceItem: React.FC<GasPriceItemProps> = ({ title, value }) => {
   return (
-    <Card className="p-4 rounded-lg shadow-md border border-gray-200 min-w-[180px]">
+    <Card className="bg-gray-200 p-4 mt-4 rounded-lg shadow-md min-w-[180px]">
       <Text className="font-bold pr-4">{title}:</Text>
       <Text
         className={`${
@@ -84,19 +85,19 @@ const GasPricesContentLoading: React.FC = () => {
       <Heading className="font-semibold text-white">Gas Price Tracker</Heading>
       <Flex
         justify="between"
-        className="mt-6"
+        className="mt-10"
         direction={{
           initial: "column",
           sm: "row",
         }}
       >
-        <Card className="p-4 rounded-lg shadow-md border border-gray-200 min-w-[180px]">
+        <Card className="bg-gray-200  p-4 rounded-lg shadow-md min-w-[180px]">
           <Skeleton width="100%" height="24px" />
         </Card>
-        <Card className="p-4 rounded-lg shadow-md border border-gray-200 min-w-[180px]">
+        <Card className="bg-gray-200  p-4 rounded-lg shadow-md min-w-[180px]">
           <Skeleton width="100%" height="24px" />
         </Card>
-        <Card className="p-4 rounded-lg shadow-md border border-gray-200 min-w-[180px]">
+        <Card className="bg-gray-200 p-4 rounded-lg shadow-md min-w-[180px]">
           <Skeleton width="100%" height="24px" />
         </Card>
       </Flex>

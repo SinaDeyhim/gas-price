@@ -2,9 +2,9 @@ import { LRUCache } from "lru-cache";
 import md5 from "md5";
 
 const CACHE_SIZE = 10;
-const cache = new LRUCache({ max: CACHE_SIZE, ttl: 5000 });
+const cache = new LRUCache({ max: CACHE_SIZE, ttl: 10000 });
 
-type Value = {
+export type Value = {
   status: string;
   data?: Record<string, unknown>;
 };

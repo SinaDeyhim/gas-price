@@ -28,7 +28,7 @@ type GasPriceItemProps = {
   value: string;
 };
 
-const GAS_PRICE_URL = `https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=${process.env.REACT_APP_ETHERSCAN_API_KEY}`;
+const GAS_PRICE_URL = `https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey${process.env.REACT_APP_ETHERSCAN_API_KEY}`;
 
 type GasTier = "Fast" | "Average" | "Slow";
 
@@ -105,9 +105,22 @@ const GasPricesContentLoading: React.FC = () => {
   );
 };
 
+const GasPricesContentError: React.FC = () => {
+  return (
+    <Container className="mx-auto p-4 max-w-screen-md mt-6">
+      <Heading className="font-semibold text-white">Gas Price Tracker</Heading>
+      <Card className="bg-gray-200 p-4 rounded-lg shadow-md min-w-[180px] mt-6">
+        <Text className="font-bold pr-4 text-red-400">
+          Gas prices could not be fetched. Please try again
+        </Text>
+      </Card>
+    </Container>
+  );
+};
+
 function GasPrices() {
   return (
-    <ErrorBoundary>
+    <ErrorBoundary fallback={<GasPricesContentError />}>
       <Suspense fallback={<GasPricesContentLoading />}>
         <GasPricesContent />
       </Suspense>

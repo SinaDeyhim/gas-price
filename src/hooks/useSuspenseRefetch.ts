@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import useSuspenseFetch, { Value } from "./useSuspenseFetch";
 
-const useSuspenseRefetch = (url: string) => {
+const useSuspenseRefetch = (url: string, ttl = 10000) => {
   // Fetch the data using useFetchSuspense
   const data = useSuspenseFetch(url);
 
@@ -13,9 +13,10 @@ const useSuspenseRefetch = (url: string) => {
         .then((response) => response.json())
         .catch((error) => {
           // Handle errors
-          console.error("Error fetching data:", error);
+          console.log(">>>> err");
+          throw new Error("Promise rejected");
         });
-    }, 10000); // Refetch every 10 seconds
+    }, ttl); // Refetch every 10 seconds
 
     // Clean up the interval on component unmount
     return () => clearInterval(intervalId);

@@ -25,7 +25,15 @@ const useFetchSuspense = (url: string) => {
   }
 
   const promise = fetch(url)
-    .then((response) => response.json())
+    .then(async (response) => {
+      const data = await response.json();
+      if (data.status === "0") {
+        value.status = "rejected";
+        cache.set(key, value);
+        throw new Error("Promise rejected");
+      }
+      return data;
+    })
     .catch((error) => {
       value.status = "rejected";
       cache.set(key, value);

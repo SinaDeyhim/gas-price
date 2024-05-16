@@ -19,7 +19,7 @@ const useSuspenseRefetch = (url: string, ttl = 10000) => {
 
     // Clean up the interval on component unmount
     return () => clearInterval(intervalId);
-  }, [url]);
+  }, [url, ttl]);
 
   // Return the data
   return data;

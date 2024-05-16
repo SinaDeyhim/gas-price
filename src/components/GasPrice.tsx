@@ -7,7 +7,6 @@ import {
   Flex,
   Skeleton,
 } from "@radix-ui/themes";
-import useFetchSuspense from "../hooks/useSuspenseFetch";
 import ErrorBoundary from "./ErrorBoundary";
 import useSuspenseRefetch from "../hooks/useSuspenseRefetch";
 
